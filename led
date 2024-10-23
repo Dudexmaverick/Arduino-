@@ -1,0 +1,34 @@
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <Fonts/FreeSerif12pt7b.h>
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+void setup() {
+  Serial.begin(115200);
+
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println(F("Falha na alocação do SSD1306"));
+    for (;;);
+  }
+
+  delay(2000);
+
+  display.setFont(&FreeSerif12pt7b);
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setFont(&FreeSerif12pt7b);
+  display.setCursor(0, 10);
+  display.println("Scrolling Hello");
+  display.display();
+  delay(100);
+}
+
+void loop() {
+
+}
